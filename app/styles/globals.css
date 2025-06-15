@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+	--font-inter: "Inter", "system-ui", sans-serif;
+}
+
+*,
+*::after,
+*::before {
+	transition: all 0.2s;
+}
+
+html,
+body {
+	scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+body {
+	@apply font-inter text-sm antialiased bg-[#121217];
+}
+
+button,
+input[type="button"],
+a {
+	@apply cursor-pointer;
+}
+
+input:focus,
+textarea:focus {
+	outline: none;
+}

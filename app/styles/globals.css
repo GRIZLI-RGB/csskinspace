@@ -2,6 +2,32 @@
 
 @theme {
 	--font-inter: "Inter", "system-ui", sans-serif;
+
+	--color-primaryBorder: #1c1d26;
+	--color-primaryBackground: #121217;
+	--color-secondaryBackground: #1c1d26;
+	--color-thirdyBackground: #1d1d27;
+	--color-fourthBackground: #252632;
+
+	--color-primaryText: #dedede;
+	--color-secondaryText: #787e87;
+
+	--color-placeholderText: #383a43;
+
+	--color-accentBlue: #3a35fb;
+	--color-accentPurple: #615def;
+
+	--breakpoint-xs: 520px;
+	--breakpoint-sm: 768px;
+	--breakpoint-md: 1024px;
+	--breakpoint-lg: 1320px;
+	--breakpoint-xl: 1520px;
+}
+
+@layer utilities {
+	.flex-middle {
+		@apply flex items-center justify-center;
+	}
 }
 
 *,
@@ -20,7 +46,7 @@ body::-webkit-scrollbar {
 }
 
 body {
-	@apply font-inter text-sm antialiased bg-[#121217];
+	@apply font-inter font-normal text-sm text-primaryText antialiased bg-primaryBackground;
 }
 
 button,
@@ -32,4 +58,31 @@ a {
 input:focus,
 textarea:focus {
 	outline: none;
+}
+
+input::placeholder {
+	@apply text-placeholderText;
+}
+
+.scrollbar-cart {
+	overflow-y: auto;
+}
+
+.scrollbar-cart::-webkit-scrollbar {
+	width: 2px;
+}
+
+.scrollbar-cart::-webkit-scrollbar-thumb {
+	background: #3c3d4d;
+	border-radius: 10px;
+}
+
+.scrollbar-cart::-webkit-scrollbar-track {
+	opacity: 0;
+}
+
+.container {
+	max-width: 1266px;
+	padding: 0 20px;
+	margin: 0 auto;
 }

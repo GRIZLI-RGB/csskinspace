@@ -3,7 +3,7 @@ import Link from "@/app/components/link";
 import Text from "@/app/components/text";
 import Title from "@/app/components/title";
 
-export default function TermsOfUse() {
+export default function TermsOfUsePage() {
 	return (
 		<>
 			<Title center tag="h1">

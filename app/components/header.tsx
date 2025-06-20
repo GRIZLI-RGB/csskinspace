@@ -13,21 +13,21 @@ import Logo from "./logo";
 import data from "../utils/data";
 import {
 	_cartItems_,
+	// _disableBodyScroll_,
 	_isMobileMenuOpen_,
 	// _isOpenPurchaseItemsModal_,
 	// _user_,
 } from "../utils/store";
+import Modal from "./modal";
 
 function CurrencySelector() {
-	const [currentCurrency, setCurrentCurrency] = useState<"eur" | "gbp">(
-		"eur"
-	);
+	const [currentCurrency, setCurrentCurrency] = useState<string>("eur");
 	const [isOpen, setIsOpen] = useState(false);
 	const wrapperRef = useRef<HTMLDivElement>(null);
 
 	const toggleDropdown = () => setIsOpen((prev) => !prev);
 
-	const handleCurrencyChange = (currency: "eur" | "gbp") => {
+	const handleCurrencyChange = (currency: string) => {
 		setCurrentCurrency(currency);
 		setIsOpen(false);
 	};
@@ -76,31 +76,44 @@ function CurrencySelector() {
 				/>
 			</button>
 
-			{isOpen && (
-				<div className="absolute top-full left-0 mt-2 w-32 bg-secondaryBackground border border-primaryBorder shadow-lg rounded-md z-10 overflow-hidden">
-					{(["eur", "gbp"] as const)
-						.filter((currency) => currency !== currentCurrency)
-						.map((currency) => (
+			<AnimatePresence>
+				{isOpen && (
+					<motion.div
+						initial={{ opacity: 0, scale: 1 }}
+						animate={{ opacity: 1, scale: 1 }}
+						exit={{ opacity: 0, scale: 1 }}
+						transition={{ duration: 0.2 }}
+						className="absolute mt-2 w-full left-0 righ-0 bg-[#2A2C3C] rounded p-1 z-[50]"
+					>
+						{["eur", "gbp"].map((item) => (
 							<button
-								key={currency}
-								onClick={() => handleCurrencyChange(currency)}
-								className={`flex items-center gap-2 w-full px-3 py-2 text-left ${
-									currency === currentCurrency
-										? "bg-primaryBackground !cursor-default"
-										: "text-secondaryText hover:text-primaryText hover:bg-primaryBackground"
-								}`}
+								onClick={() => {
+									if (item !== currentCurrency) {
+										handleCurrencyChange(item);
+									}
+								}}
+								key={item}
+								className={clsx(
+									"flex gap-1 items-center w-full rounded px-4 py-2.5",
+									item === currentCurrency
+										? "opacity-50 !cursor-default"
+										: "hover:bg-primaryText/5"
+								)}
 							>
 								<Image
-									src={`/images/currencies/${currency}.png`}
+									src={`/images/currencies/${item}.png`}
+									alt=""
 									width={20}
 									height={20}
-									alt={currency}
 								/>
-								<span className="uppercase">{currency}</span>
+								<span className="text-secondaryText font-medium uppercase">
+									{item}
+								</span>
 							</button>
 						))}
-				</div>
-			)}
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 }
@@ -164,8 +177,8 @@ function CartButton({ className }: { className?: string }) {
 				<Image
 					className={clsx(
 						isOpenCart
-							? "brightness-200"
-							: "group-hover:brightness-200"
+							? "brightness-[195%]"
+							: "group-hover:brightness-[195%]"
 					)}
 					src="/icons/shopping-cart.svg"
 					alt="Shopping cart"
@@ -183,11 +196,11 @@ function CartButton({ className }: { className?: string }) {
 						animate={{ opacity: 1, scale: 1 }}
 						exit={{ opacity: 0, scale: 1 }}
 						transition={{ duration: 0.2 }}
-						className="w-[795px] overflow-hidden absolute top-full mt-4 right-0 rounded-2xl bg-primaryBorder flex justify-between items-start"
+						className="max-md:flex-col w-[795px] max-md:w-[320px] overflow-hidden absolute top-full mt-4 right-0 max-md:right-[-60px] rounded-2xl bg-primaryBorder flex justify-between items-start"
 					>
-						<div className="p-6 pr-1.5 w-full">
+						<div className="p-6 pr-1.5 w-full max-md:pl-4">
 							<div className="scrollbar-cart max-h-[192px]">
-								<div className="pr-4 flex flex-col gap-4">
+								<div className="pr-4 max-md:pr-2.5 flex flex-col gap-4">
 									{[
 										{ id: 1 },
 										{ id: 2 },
@@ -198,16 +211,17 @@ function CartButton({ className }: { className?: string }) {
 									].map((cartItem) => (
 										<div
 											key={cartItem.id}
-											className="bg-fourthBackground rounded-md w-full p-[14px] flex items-stretch gap-[14px] justify-between"
+											className="bg-fourthBackground rounded-md w-full max-md:px-2 max-md:py-3 p-[14px] flex items-stretch gap-[14px] justify-between"
 										>
 											<Image
+												className="max-md:w-12 max-md:min-w-12 max-md:self-center"
 												quality={100}
 												src="/images/sticker.png"
 												alt=""
 												width={82}
 												height={60}
 											/>
-											<div className="flex flex-col">
+											<div className="flex flex-col max-md:text-xs">
 												<h6 className="text-accentPurple font-semibold">
 													Sticker | huNter- | Copen
 												</h6>
@@ -249,7 +263,7 @@ function CartButton({ className }: { className?: string }) {
 								</div>
 							</div>
 						</div>
-						<div className="p-6 bg-fourthBackground min-w-[369px]">
+						<div className="p-6 bg-fourthBackground min-w-[369px] max-md:min-w-auto">
 							<ul>
 								{[
 									{
@@ -277,14 +291,14 @@ function CartButton({ className }: { className?: string }) {
 							<p className="text-center text-xs text-secondaryText my-4">
 								By buying skins, i agree with the{" "}
 								<a
-									className="text-accentBlue underline hover:brightness-90"
+									className="text-accentBlue underline hover:text-accentBlueHovered font-semibold"
 									href="/privacy-policy"
 									target="_blank"
 								>
 									policy of confidentiality
 								</a>
 							</p>
-							<button className="flex-middle gap-1 rounded w-full text-center bg-accentBlue p-3 hover:opacity-75">
+							<button className="flex-middle gap-1 rounded w-full text-center bg-accentBlue hover:bg-accentBlueHovered p-3">
 								<Image
 									className="brightness-200"
 									src="/icons/shopping-cart.svg"
@@ -309,7 +323,7 @@ function CartButton({ className }: { className?: string }) {
 	);
 }
 
-function SearchBar() {
+function SearchBar({ className }: { className?: string }) {
 	const [search, setSearch] = useState<{
 		query: string;
 		focused: boolean;
@@ -320,12 +334,13 @@ function SearchBar() {
 
 	return (
 		<div
-			className={
-				"rounded-md flex items-center px-3 h-[42px] max-w-[278px] gap-3 w-full bg-secondaryBackground"
-			}
+			className={clsx(
+				"rounded-md flex items-center px-3 h-[42px] max-w-[278px] gap-3 w-full",
+				search.focused ? "bg-[#1F202A]" : "bg-secondaryBackground",
+				className
+			)}
 		>
 			<Image
-				className={clsx(search.focused && "brightness-200")}
 				src="/icons/search.svg"
 				alt="Search"
 				width={20}
@@ -358,80 +373,324 @@ function SearchBar() {
 	);
 }
 
-export default function Header() {
-	const pathname = usePathname();
+function Balance({ className }: { className?: string }) {
+	const [isOpenTopUpBalanceModal, setIsOpenTopUpBalanceModal] =
+		useState(false);
+	const [amount, setAmount] = useState("");
+	const [paymentSystem, setPaymentSystem] = useState<string>("visa");
+	const [currency, setCurrency] = useState<string>("eur");
+	const [isOpenCurrenciesDropdown, setIsOpenCurrenciesDropdown] =
+		useState(false);
+
+	const currenciesRef = useRef<HTMLDivElement>(null);
+	useOnClickOutside(currenciesRef as RefObject<HTMLDivElement>, () =>
+		setIsOpenCurrenciesDropdown(false)
+	);
 
 	return (
-		<header className="px-8 h-[72px] flex items-center justify-between gap-6">
-			<div className="flex items-center gap-[128px] w-full">
-				<Logo />
-				<SearchBar />
+		<>
+			<div
+				className={clsx(
+					"bg-thirdyBackground rounded-sm flex items-center gap-2.5 p-1.5 pl-2.5",
+					className
+				)}
+			>
+				<span className="font-medium">€16,502.50</span>
+				<button
+					onClick={() => setIsOpenTopUpBalanceModal(true)}
+					className="bg-accentBlue hover:bg-accentBlueHovered rounded-sm flex-middle w-[30px] h-[30px]"
+				>
+					<Image
+						quality={100}
+						src="/icons/plus.svg"
+						width={13}
+						height={13}
+						alt="Add balance"
+					/>
+				</button>
 			</div>
-			<div className="h-full flex items-center gap-8 w-full justify-end">
-				<div className="flex items-center h-full">
-					<nav className="flex h-full items-center">
-						{data.header.navigation.map(({ link, text }) => (
-							<div
-								key={text}
-								className="px-2.5 relative h-full items-center flex justify-center"
-							>
-								<Link
-									className={clsx(
-										"font-medium hover:text-primaryText",
-										pathname === link
-											? "text-primaryText !cursor-default"
-											: "text-secondaryText"
-									)}
-									href={link}
-								>
-									{text}
-								</Link>
-
-								<div
-									className={clsx(
-										"absolute top-0 w-1/2 rounded-b-sm bg-accentBlue h-1",
-										pathname === link
-											? "opacity-100"
-											: "opacity-0"
-									)}
+			<Modal
+				className="max-w-[360px]"
+				open={isOpenTopUpBalanceModal}
+				onClose={() => setIsOpenTopUpBalanceModal(false)}
+				showCloseButton
+			>
+				<h6 className="uppercase flex items-center gap-2 mb-6">
+					<Image
+						src="/icons/empty-wallet.svg"
+						alt=""
+						width={24}
+						height={24}
+					/>
+					<span className="font-bold text-lg">Balance top up</span>
+				</h6>
+				<div className="relative" ref={currenciesRef}>
+					<button
+						onClick={() =>
+							setIsOpenCurrenciesDropdown(
+								!isOpenCurrenciesDropdown
+							)
+						}
+						className={clsx(
+							"rounded-md flex items-center justify-between py-2.5 px-4 w-full",
+							isOpenCurrenciesDropdown
+								? "bg-[#2A2C3C]"
+								: "hover:bg-[#2A2C3C] bg-fourthBackground"
+						)}
+					>
+						<div className="-mt-0.5 pb-0.5">
+							<span className="text-[#51525B] text-xs font-medium">
+								Select currency
+							</span>
+							<div className="flex gap-2 items-center">
+								<Image
+									width={20}
+									height={20}
+									alt=""
+									src={`/images/currencies/${currency}.png`}
 								/>
+								<span>{currency.toUpperCase()}</span>
 							</div>
-						))}
-					</nav>
-					<CurrencySelector />
-				</div>
-				<div className="h-[42px] items-stretch flex gap-2">
-					<CartButton />
-					<div className="bg-thirdyBackground rounded-sm flex items-center gap-2.5 p-1.5 pl-2.5">
-						<span className="font-medium">€16,502.50</span>
-						<button className="bg-accentBlue rounded-sm flex-middle w-[30px] h-[30px] hover:opacity-75">
-							<Image
-								quality={100}
-								src="/icons/plus.svg"
-								width={13}
-								height={13}
-								alt="Add balance"
-							/>
-						</button>
-					</div>
-					<button className="flex gap-2 p-1 bg-thirdyBackground rounded-sm pr-2 group">
+						</div>
 						<Image
-							className="rounded-sm min-w-[34px]"
-							src="/images/avatar.png"
-							alt="Avatar"
-							width={34}
-							height={34}
-						/>
-						<Image
-							className="group-hover:brightness-200"
+							className={clsx(
+								isOpenCurrenciesDropdown && "-rotate-180"
+							)}
 							src="/icons/arrow-down.svg"
 							alt=""
 							width={14}
 							height={14}
 						/>
 					</button>
+
+					<AnimatePresence>
+						{isOpenCurrenciesDropdown && (
+							<motion.div
+								initial={{ opacity: 0, scale: 1 }}
+								animate={{ opacity: 1, scale: 1 }}
+								exit={{ opacity: 0, scale: 1 }}
+								transition={{ duration: 0.2 }}
+								className="absolute mt-2 w-full left-0 righ-0 bg-[#2A2C3C] rounded p-1 z-[50]"
+							>
+								{["eur", "gbp"].map((item) => (
+									<button
+										onClick={() => {
+											if (item !== currency) {
+												setCurrency(item);
+												setIsOpenCurrenciesDropdown(
+													false
+												);
+											}
+										}}
+										key={item}
+										className={clsx(
+											"flex gap-1 items-center w-full rounded px-4 py-2.5",
+											item === currency
+												? "opacity-50 !cursor-default"
+												: "hover:bg-primaryText/5"
+										)}
+									>
+										<Image
+											src={`/images/currencies/${item}.png`}
+											alt=""
+											width={20}
+											height={20}
+										/>
+										<span className="text-secondaryText font-medium uppercase">
+											{item}
+										</span>
+									</button>
+								))}
+							</motion.div>
+						)}
+					</AnimatePresence>
+				</div>
+				<div className="flex items-stretch gap-2 my-4">
+					{["visa", "mastercard"].map((item) => (
+						<button
+							onClick={() => setPaymentSystem(item)}
+							className={clsx(
+								"w-full h-[92px] flex-middle rounded-md max-xs:h-16",
+								item === paymentSystem
+									? "!cursor-default bg-[#2B2D40]"
+									: "bg-fourthBackground hover:bg-[#2A2C3C]"
+							)}
+							key={item}
+						>
+							<Image
+								quality={100}
+								width={64}
+								height={64}
+								alt={item.toUpperCase()}
+								src={`/images/payment-systems/${item}.png`}
+							/>
+						</button>
+					))}
+				</div>
+				<input
+					className="text-xs font-medium h-12 rounded-md px-[13px] bg-[#191920] w-full focus:bg-[#1A1B22] pb-0.5"
+					type="number"
+					placeholder="Enter amount"
+					value={amount}
+					onChange={(e) => setAmount(e.target.value)}
+				/>
+				<button className="text-white text-center w-full bg-accentBlue hover:bg-accentBlueHovered font-bold rounded h-[42px] mt-6 mb-2">
+					Go to payment
+				</button>
+				<p className="text-center text-secondaryText font-medium">
+					By clicking the button above, you agree to the{" "}
+					<a
+						className="font-semibold underline text-accentBlue hover:text-accentBlueHovered"
+						href="/privacy-policy"
+						target="_blank"
+					>
+						Privacy Policy
+					</a>{" "}
+					and{" "}
+					<a
+						className="font-semibold underline text-accentBlue hover:text-accentBlueHovered"
+						href="/terms-of-use"
+						target="_blank"
+					>
+						Terms of Use
+					</a>
+				</p>
+			</Modal>
+		</>
+	);
+}
+
+function Menu({ className }: { className?: string }) {
+	const pathname = usePathname();
+
+	return (
+		<nav className={clsx("flex h-full items-center", className)}>
+			{data.header.navigation.map(({ link, text }) => (
+				<div
+					key={text}
+					className="px-2.5 relative h-full items-center flex justify-center"
+				>
+					<Link
+						className={clsx(
+							"font-medium hover:text-primaryText",
+							pathname === link
+								? "text-primaryText !cursor-default"
+								: "text-secondaryText"
+						)}
+						href={link}
+					>
+						{text}
+					</Link>
+
+					<div
+						className={clsx(
+							"absolute top-0 w-1/2 rounded-b-sm bg-accentBlue h-1 max-md:hidden",
+							pathname === link ? "opacity-100" : "opacity-0"
+						)}
+					/>
+				</div>
+			))}
+		</nav>
+	);
+}
+
+function User({ className }: { className?: string }) {
+	return (
+		<Link
+			href="/profile/inventory"
+			className={clsx(
+				"flex gap-2 p-1 bg-thirdyBackground rounded-sm group hover:bg-fourthBackground",
+				className
+			)}
+		>
+			<Image
+				className="rounded-sm min-w-[34px]"
+				src="/images/avatar.png"
+				alt="Avatar"
+				width={34}
+				height={34}
+			/>
+			{/* <Image
+							className="group-hover:brightness-200"
+							src="/icons/arrow-down.svg"
+							alt=""
+							width={14}
+							height={14}
+						/> */}
+		</Link>
+	);
+}
+
+export default function Header() {
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useAtom(_isMobileMenuOpen_);
+
+	return (
+		<div className="relative">
+			<header className="px-8 h-[72px] flex items-center justify-between gap-6 z-[100] relative">
+				<div className="flex items-center gap-[128px] w-full">
+					<Logo />
+					<SearchBar className="max-md:hidden" />
+				</div>
+				<div className="h-full flex items-center gap-8 w-full justify-end">
+					<div className="flex items-center h-full max-md:hidden">
+						<Menu className="max-md:hidden" />
+						<CurrencySelector />
+					</div>
+					<div className="h-[42px] items-stretch flex gap-2">
+						<CartButton />
+						<Balance className="max-md:hidden" />
+						<User className="max-md:hidden" />
+					</div>
+				</div>
+				<div
+					className="hidden max-md:flex flex-col gap-1 cursor-pointer"
+					onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+				>
+					<div
+						className={`w-6 h-0.5 rounded-full bg-primaryText ${
+							isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
+						}`}
+					/>
+					<div
+						className={`w-6 h-0.5 rounded-full bg-primaryText ${
+							isMobileMenuOpen ? "opacity-0" : "opacity-100"
+						}`}
+					/>
+					<div
+						className={`w-6 h-0.5 rounded-full bg-primaryText ${
+							isMobileMenuOpen
+								? "-rotate-45 -translate-y-1.5"
+								: ""
+						}`}
+					/>
+				</div>
+			</header>
+			<div
+				className={clsx(
+					"z-[100] absolute top-[72px] left-0 w-full transform origin-top bg-fourthBackground p-5",
+					isMobileMenuOpen
+						? "scale-y-100 opacity-100"
+						: "scale-y-0 opacity-0 pointer-events-none"
+				)}
+			>
+				<div className="flex flex-col gap-6">
+					<div className="flex items-center gap-4">
+						<CurrencySelector />
+						<Balance />
+						<User />
+					</div>
+					<SearchBar className="w-full max-w-full" />
+					<Menu className="!flex-col !items-start !gap-4 !h-auto" />
 				</div>
 			</div>
-		</header>
+			<div
+				className={clsx(
+					"backdrop-blur-sm fixed top-0 left-0 w-screen h-screen",
+					isMobileMenuOpen
+						? "opacity-100"
+						: "opacity-0 pointer-events-none"
+				)}
+			/>
+		</div>
 	);
 }

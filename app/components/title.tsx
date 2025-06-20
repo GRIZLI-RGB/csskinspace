@@ -15,7 +15,7 @@ export default function Title({
 		<Tag
 			className={clsx(
 				center && "text-center",
-				"text-[32px] font-semibold",
+				"text-[32px] font-semibold max-sm:text-2xl",
 				className
 			)}
 		>

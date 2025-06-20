@@ -15,11 +15,12 @@
 	--color-placeholderText: #383a43;
 
 	--color-accentBlue: #3a35fb;
+	--color-accentBlueHovered: #2e2ac9;
 	--color-accentPurple: #615def;
 
 	--breakpoint-xs: 520px;
 	--breakpoint-sm: 768px;
-	--breakpoint-md: 1024px;
+	--breakpoint-md: 1168px;
 	--breakpoint-lg: 1320px;
 	--breakpoint-xl: 1520px;
 }
@@ -62,6 +63,17 @@ textarea:focus {
 
 input::placeholder {
 	@apply text-placeholderText;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+	display: none;
+	
 }
 
 .scrollbar-cart {

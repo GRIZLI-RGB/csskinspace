@@ -18,7 +18,7 @@ import clsx from "clsx";
 
 export default function FaqPage() {
 	return (
-		<div className="container">
+		<>
 			<Title className="mb-8" center tag="h1">
 				Frequently Asked Questions
 			</Title>
@@ -57,6 +57,6 @@ export default function FaqPage() {
 					</AccordionItem>
 				))}
 			</Accordion>
-		</div>
+		</>
 	);
 }

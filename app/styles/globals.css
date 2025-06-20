@@ -95,6 +95,7 @@ input::-webkit-inner-spin-button {
 
 .container {
 	max-width: 1266px;
-	padding: 0 20px;
+	padding-left: 20px;
+	padding-right: 20px;
 	margin: 0 auto;
 }

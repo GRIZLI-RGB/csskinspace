@@ -1,41 +1,7 @@
+import BuildBlock from "@/app/components/build-block";
+import Link from "@/app/components/link";
 import Text from "@/app/components/text";
 import Title from "@/app/components/title";
-import { Fragment } from "react";
-
-function Link({
-	href,
-	children,
-	target,
-}: {
-	href: string;
-	children: React.ReactNode;
-	target?: "_blank" | "_self" | "_parent" | "_top";
-}) {
-	return (
-		<a
-			target={target}
-			rel={target === "_blank" ? "noopener noreferrer" : undefined}
-			className="underline text-accentBlue hover:text-accentBlueHovered font-medium"
-			href={href}
-		>
-			{children}
-		</a>
-	);
-}
-
-function Block({ title, text }: { title: string; text: React.ReactNode[] }) {
-	return (
-		<div>
-			<Title className="mb-2">{title}</Title>
-			{text.map((item, index) => (
-				<Fragment key={index}>
-					<Text>{item}</Text>
-					{index !== text.length - 1 && <br />}
-				</Fragment>
-			))}
-		</div>
-	);
-}
 
 export default function Guarantees() {
 	return (
@@ -50,14 +16,14 @@ export default function Guarantees() {
 				the scope of our obligations and your rights as a Customer.
 			</Text>
 			<div className="flex flex-col gap-6">
-				<Block
+				<BuildBlock
 					title="1. Instant Delivery Guarantee"
 					text={[
 						"Once payment is successfully processed and the User’s Steam account satisfies all technical and eligibility criteria (including, but not limited to, the absence of trade restrictions, a public inventory, and Steam Guard activation), purchased items will be delivered instantly via automated systems.",
 						"Delivery may be delayed in cases of technical issues related to the Steam platform or if account-specific restrictions prevent successful transfer. In such cases, the Company will provide reasonable assistance but shall not be held liable for delays beyond its control.",
 					]}
 				/>
-				<Block
+				<BuildBlock
 					title="2. Secure Transactions and Data Protection"
 					text={[
 						<>
@@ -75,7 +41,7 @@ export default function Guarantees() {
 						</>,
 					]}
 				/>
-				<Block
+				<BuildBlock
 					title="3. Transparent Pricing"
 					text={[
 						<>
@@ -90,7 +56,7 @@ export default function Guarantees() {
 						</>,
 					]}
 				/>
-				<Block
+				<BuildBlock
 					title="4. Market-Based Valuation"
 					text={[
 						<>
@@ -103,7 +69,7 @@ export default function Guarantees() {
 						</>,
 					]}
 				/>
-				<Block
+				<BuildBlock
 					title="5. Automated and Impartial Transactions"
 					text={[
 						<>
@@ -117,7 +83,7 @@ export default function Guarantees() {
 						</>,
 					]}
 				/>
-				<Block
+				<BuildBlock
 					title="6. Anti-Fraud and Verified User System"
 					text={[
 						<>
@@ -137,7 +103,7 @@ export default function Guarantees() {
 						</>,
 					]}
 				/>
-				<Block
+				<BuildBlock
 					title="7. Refunds and Transaction Finality"
 					text={[
 						<>
@@ -161,7 +127,7 @@ export default function Guarantees() {
 						</>,
 					]}
 				/>
-				<Block
+				<BuildBlock
 					title="8. Platform Availability and Uptime"
 					text={[
 						<>
@@ -180,7 +146,7 @@ export default function Guarantees() {
 						</>,
 					]}
 				/>
-				<Block
+				<BuildBlock
 					title="9. Independence and Neutrality"
 					text={[
 						<>
@@ -194,7 +160,7 @@ export default function Guarantees() {
 						</>,
 					]}
 				/>
-				<Block
+				<BuildBlock
 					title="10. Support Commitment"
 					text={[
 						<>

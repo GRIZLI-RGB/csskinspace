@@ -4,8 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
-		"prod-old": "npm install --legacy-peer-deps && next build && next start -H 127.0.0.1 -p 3000",
-		"prod": "npm install --legacy-peer-deps && next build && next start"
+		"prod": "npm install --legacy-peer-deps && next build && next start -H 127.0.0.1 -p 3000"
 	},
 	"dependencies": {
 		"clsx": "^2.1.1",

@@ -71,67 +71,67 @@ const data = {
 	},
 	faq: [
 		{
-			question: "How does CsSkinSpace work?",
+			question: "💡 How does CsSkinSpace work?",
 			answer: "Answer",
 		},
 		{
-			question: "Is it safe to use CsSkinSpace?",
+			question: "🛡️ Is it safe to use CsSkinSpace?",
 			answer: "Answer",
 		},
 		{
-			question: "Do I need an account to use the site?",
+			question: "👤 Do I need an account to use the site?",
 			answer: "Answer",
 		},
 		{
-			question: "What types of skins are available?",
+			question: "🎮 What types of skins are available?",
 			answer: "Answer",
 		},
 		{
-			question: "Which countries can access the service?",
+			question: "🌍 Which countries can access the service?",
 			answer: "Answer",
 		},
 		{
-			question: "Which currencies are supported?",
+			question: "💶 Which currencies are supported?",
 			answer: "Answer",
 		},
 		{
-			question: "How are prices determined?",
+			question: "📈 How are prices determined?",
 			answer: "Answer",
 		},
 		{
-			question: "Are there any hidden fees or charges?",
+			question: "💸 Are there any hidden fees or charges?",
 			answer: "Answer",
 		},
 		{
-			question: "I completed payment but didn’t receive my skin — what should I do?",
+			question: "⛔ I completed payment but didn’t receive my skin — what should I do?",
 			answer: "Answer",
 		},
 		{
-			question: "Can I cancel my order or get a refund?",
+			question: "🔁 Can I cancel my order or get a refund?",
 			answer: "Answer",
 		},
 		{
-			question: "Can I sell or withdraw skins on CsSkinSpace?",
+			question: "💼 Can I sell or withdraw skins on CsSkinSpace?",
 			answer: "Answer",
 		},
 		{
-			question: "Are the skins tradeable?",
+			question: "🎯 Are the skins tradeable?",
 			answer: "Answer",
 		},
 		{
-			question: "Is my personal data safe?",
+			question: "🔒 Is my personal data safe?",
 			answer: "Answer",
 		},
 		{
-			question: "Can I use VPN or proxy services?",
+			question: "🕹️ Can I use VPN or proxy services?",
 			answer: "Answer",
 		},
 		{
-			question: "How can I contact support?",
+			question: "📬 How can I contact support?",
 			answer: "Answer",
 		},
 		{
-			question: "Do you offer bonuses, discounts, or loyalty programs?",
+			question: "🎁 Do you offer bonuses, discounts, or loyalty programs?",
 			answer: "Answer",
 		},
 	],

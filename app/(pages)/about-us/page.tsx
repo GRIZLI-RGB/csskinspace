@@ -38,20 +38,20 @@ export default function AboutUsPage() {
 					title="What We Offer"
 					text={[
 						<>
-							- Instant Delivery: As soon as your payment is
+							- 💥 Instant Delivery: As soon as your payment is
 							processed, your skins are yours — instantly.
 							<br />
-							<br />- Security First: We use encrypted connections
+							<br />- 🔐 Security First: We use encrypted connections
 							and official Steam APIs to keep your account and
 							purchases safe.
 							<br />
-							<br />- Real Payments Only: No tokens or internal
+							<br />- 💶 Real Payments Only: No tokens or internal
 							credits. We work with real currencies — EUR and GBP.
 							<br />
-							<br />- Market-Driven Prices: Our pricing reflects
+							<br />- 📈 Market-Driven Prices: Our pricing reflects
 							current skin values and community trends.
 							<br />
-							<br />- Exclusively CS2: We{"'"}re laser-focused on
+							<br />- 🕹️ Exclusively CS2: We{"'"}re laser-focused on
 							Counter-Strike 2 to deliver the best possible
 							experience in one of the world{"'"}s most iconic
 							games.
@@ -86,7 +86,7 @@ export default function AboutUsPage() {
 							We don{"'"}t offer live chat yet, but we{"'"}d love
 							to hear from you.
 							<br />
-							Contact us anytime at{" "}
+							💬 Contact us anytime at{" "}
 							<Link href="#" target="_blank">
 								SUPPORT EMAIL
 							</Link>

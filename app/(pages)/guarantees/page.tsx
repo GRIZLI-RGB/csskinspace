@@ -176,7 +176,7 @@ export default function Guarantees() {
 					]}
 				/>
 				<Text>
-					This Guarantees section is provided for informational
+					📌 This Guarantees section is provided for informational
 					purposes and does not create any rights or obligations
 					beyond those expressly set forth in the [Terms of Use].
 				</Text>

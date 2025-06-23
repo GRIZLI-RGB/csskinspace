@@ -30,7 +30,7 @@ export default function FaqPage() {
 								{({ expanded }) => (
 									<AccordionItemButton
 										className={clsx(
-											"cursor-pointer font-semibold text-lg max-sm:text-base max-sm:px-6 gap-5 pr-6 pl-12 max-sm:h-auto max-sm:py-5 h-[82px] flex items-center justify-between",
+											"cursor-pointer font-semibold text-lg max-sm:text-base max-sm:px-6 gap-5 px-6 max-sm:h-auto max-sm:py-5 h-[82px] flex items-center justify-between",
 											expanded
 												? "rounded-t-2xl bg-[#191922]"
 												: "rounded-2xl bg-[#16161D] hover:bg-[#191922]"

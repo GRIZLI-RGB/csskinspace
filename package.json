@@ -7,6 +7,7 @@
 		"prod": "npm install --legacy-peer-deps && next build && next start -H 127.0.0.1 -p 3000"
 	},
 	"dependencies": {
+		"axios": "^1.10.0",
 		"clsx": "^2.1.1",
 		"jotai": "^2.12.5",
 		"motion": "^12.18.1",
@@ -14,7 +15,9 @@
 		"react": "^19.0.0",
 		"react-accessible-accordion": "^5.0.1",
 		"react-dom": "^19.0.0",
+		"react-icons": "^5.5.0",
 		"react-responsive-modal": "^6.4.2",
+		"react-tooltip": "^5.29.1",
 		"usehooks-ts": "^3.1.1"
 	},
 	"devDependencies": {

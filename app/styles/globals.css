@@ -29,6 +29,9 @@
 	.flex-middle {
 		@apply flex items-center justify-center;
 	}
+	.raise-up {
+		@apply relative z-[1];
+	}
 }
 
 *,
@@ -73,7 +76,6 @@ input::-webkit-inner-spin-button {
 
 .hide-scrollbar::-webkit-scrollbar {
 	display: none;
-	
 }
 
 .scrollbar-cart {
@@ -98,4 +100,9 @@ input::-webkit-inner-spin-button {
 	padding-left: 20px;
 	padding-right: 20px;
 	margin: 0 auto;
+}
+
+#default-tooltip {
+	opacity: 1;
+	border-radius: 6px;
 }

@@ -1,10 +1,9 @@
 import { atom } from "jotai";
-import { ItemType, UserType } from "./types";
 import { atomWithStorage } from "jotai/utils";
 
-export const _globalLoading_ = atom(true);
+import { ItemType, PaymentSystemType, UserType } from "./types";
 
-export const _disableBodyScroll_ = atom(false);
+export const _globalLoading_ = atom(true);
 
 export const _isMobileMenuOpen_ = atom(false);
 
@@ -22,6 +21,8 @@ export const _cartItems_ = atomWithStorage<
 		| "price"
 	>[]
 >("cartItems", []);
+
+export const _paymentSystems_ = atom<PaymentSystemType[]>([]);
 
 export const _searchQuery_ = atom("");
 

@@ -49,6 +49,20 @@ body::-webkit-scrollbar {
 	display: none;
 }
 
+::-webkit-scrollbar {
+	width: 3px;
+	height: 3px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #3c3d4d;
+	border-radius: 3px;
+}
+
 body {
 	@apply font-inter font-normal text-sm text-primaryText antialiased bg-primaryBackground;
 }
@@ -72,6 +86,14 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
+}
+
+.os-scrollbar {
+	--os-handle-bg: #3a35fb !important;
+	--os-handle-bg-hover: #2e2ac9 !important;
+	--os-handle-bg-active: #2e2ac9 !important;
+	--os-size: 6px !important;
+	z-index: 100 !important;
 }
 
 .os-scrollbar-horizontal {

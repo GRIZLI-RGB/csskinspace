@@ -120,7 +120,7 @@ export default function PagesLayout({
 			<Tooltip
 				id="default-tooltip"
 				style={{
-					zIndex: 9999,
+					zIndex: 999999,
 					backgroundColor: "#1c1d26",
 					color: "#dedede",
 				}}

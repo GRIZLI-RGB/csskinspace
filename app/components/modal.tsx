@@ -33,7 +33,9 @@ export default function Modal({
 			classNames={{
 				overlay: "!backdrop-blur-xs",
 				modal: `!bg-secondaryBackground !rounded-2xl ${
-					specialModal === "itemOpened" ? "!p-0" : "!p-8 max-xs:!p-6"
+					specialModal === "itemOpened"
+						? "!p-0 !max-w-full"
+						: "!p-8 max-xs:!p-6"
 				}`,
 			}}
 		>

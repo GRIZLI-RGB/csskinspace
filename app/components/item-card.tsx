@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import Image from "next/image";
 
-import { ItemType } from "../utils/types";
+import { ItemQualityType, ItemType, WearCategoryType } from "../utils/types";
 import { _cartItems_, _user_ } from "../utils/store";
 import Modal from "./modal";
 import Button from "./button";
+import { getItem } from "../utils/api";
+import Loader from "./loader";
 
 export default function ItemCard({ item }: { item: ItemType }) {
 	const [hovered, setHovered] = useState(false);
@@ -38,6 +40,7 @@ export default function ItemCard({ item }: { item: ItemType }) {
 	const user = useAtomValue(_user_);
 
 	const [itemOpened, setItemOpened] = useState<ItemType | null>(null);
+	const [itemLoading, setItemLoading] = useState(true);
 
 	const [isFavorited, setIsFavorited] = useState(false);
 
@@ -60,6 +63,37 @@ export default function ItemCard({ item }: { item: ItemType }) {
 		}
 
 		localStorage.setItem("favorites", JSON.stringify(favorites));
+	};
+
+	const [offers, setOffers] = useState<{
+		currency_symbol: string;
+		offer: ItemType;
+		requested_category: ItemQualityType;
+		similar_offers: {
+			data: ItemType[];
+			total: number;
+			current_page: number;
+			per_page: number;
+			to: number;
+			from: number;
+			last_page: number;
+		};
+		wear_categories: WearCategoryType[];
+	} | null>(null);
+
+	useEffect(() => {
+		setItemLoading(true);
+
+		if (itemOpened) {
+			getItem({ id: itemOpened.id })
+				.then((res) => setOffers(res.data))
+				.catch(() => (window.location.href = "/"))
+				.finally(() => setItemLoading(false));
+		}
+	}, [itemOpened]);
+
+	const handleBuyItem = (itemId: number) => {
+		alert(`Item ID: ${itemId}`);
 	};
 
 	return (
@@ -170,26 +204,54 @@ export default function ItemCard({ item }: { item: ItemType }) {
 			{/* Выбранный предмет */}
 			<Modal
 				specialModal="itemOpened"
-				showCloseButton
+				showCloseButton={!itemLoading}
 				open={itemOpened !== null}
 				onClose={() => setItemOpened(null)}
 			>
-				{itemOpened && (
-					<div className="flex items-stretch">
-						<div className="relative flex-middle p-6 bg-[#16161D]">
+				{itemLoading && (
+					<Loader className="flex-middle p-6" size="sm" />
+				)}
+				{!itemLoading && itemOpened && (
+					<div className="flex items-stretch max-lg:flex-col">
+						<div className="relative flex-middle p-6 bg-[#16161D] flex-col">
 							<img
-								className="max-w-[490px] max-h-[364px] block z-10"
+								className="max-w-[490px] max-h-[364px] block z-10 top-[20%] relative max-md:w-40"
 								src={itemOpened.img}
 								alt={itemOpened.market_hash_name}
 							/>
-							{/* TODO: Stickers */}
+							<div className="flex gap-2 px-1 z-10 mt-auto max-md:justify-between max-md:gap-4">
+								{[
+									...itemOpened.stickers.slice(0, 6),
+									...Array(
+										6 - itemOpened.stickers.length
+									).fill(null),
+								]
+									.slice(0, 6)
+									.map((sticker, index) => (
+										<div
+											key={index}
+											className="w-[122px] py-4 max-md:w-8 max-md:py-0"
+										>
+											<div className="w-12 h-12 max-md:w-full max-md:h-full">
+												<img
+													src={
+														sticker?.img ||
+														"/icons/sticker-placeholder.svg"
+													}
+													alt={sticker?.name || ""}
+													className="block w-full h-full object-cover"
+												/>
+											</div>
+										</div>
+									))}
+							</div>
 							<img
 								className="absolute"
 								src="/images/decorations/background-item-opened.png"
 								alt=""
 							/>
 						</div>
-						<div className="flex flex-col gap-1.5">
+						<div className="flex flex-col gap-1 w-[398px] max-lg:w-full z-[10]">
 							<div className="p-6 bg-fourthBackground h-full">
 								<h6 className="font-bold text-base">
 									{itemOpened.market_hash_name.replace(
@@ -197,10 +259,10 @@ export default function ItemCard({ item }: { item: ItemType }) {
 										""
 									)}
 								</h6>
-								<div className="mt-2 mb-4 font-medium text-secondaryText">
+								<div className="mb-2.5 font-medium text-secondaryText">
 									{itemOpened.wear}
 								</div>
-								<div className="bg-[#2E2F3D] p-4 rounded-t-lg">
+								<div className="bg-[#2E2F3D] px-4 py-3 rounded-t-lg">
 									<div className="flex items-center justify-between">
 										<span className="text-secondaryText">
 											Float
@@ -258,7 +320,7 @@ export default function ItemCard({ item }: { item: ItemType }) {
 									].map(({ label, value }) => (
 										<li
 											key={label}
-											className="flex items-center justify-between last:border-t last:border-t-[#2C2C3A] bg-[#2E2F3D] p-4 first:pb-2 last:pt-2"
+											className="flex items-center justify-between last:border-t last:border-t-[#2C2C3A] bg-[#2E2F3D] px-4 py-3 first:pb-2 last:pt-2"
 										>
 											<span className="text-secondaryText">
 												{label}
@@ -269,12 +331,30 @@ export default function ItemCard({ item }: { item: ItemType }) {
 										</li>
 									))}
 								</ul>
-								<div className="mt-4 mb-2 text-accentBlue font-semibold text-xl">
+								<div className="mt-4 mb-2 text-accentBlue font-semibold text-xl leading-[100%]">
 									{itemOpened.currency_symbol}
 									{itemOpened.price}
 								</div>
 								<div className="flex items-center gap-2">
 									<Button
+										onClick={() => {
+											if (
+												user &&
+												+user.balance >= +item.price
+											) {
+												handleBuyItem(item.id);
+											}
+										}}
+										tooltip={
+											!user
+												? "Need auth"
+												: +user.balance < +item.price
+												? "Low balance"
+												: undefined
+										}
+										disabled={
+											!user || +user.balance < +item.price
+										}
 										text="Buy now"
 										leftIcon={
 											"/icons/shopping-cart-white.svg"
@@ -296,7 +376,78 @@ export default function ItemCard({ item }: { item: ItemType }) {
 								</div>
 							</div>
 							<div className="p-6 bg-fourthBackground h-full">
-								Right bottom
+								<div className="flex items-center justify-between mb-2 -mt-2">
+									<span className="font-bold text-base">
+										{offers?.similar_offers.data.length}{" "}
+										offers
+									</span>
+									<span className="text-secondaryText">
+										{offers?.similar_offers.data.length}{" "}
+										offers from {user?.currency_symbol}
+										{offers?.similar_offers.data.length
+											? Math.min(
+													...offers.similar_offers.data.map(
+														(o) => Number(o.price)
+													)
+											  )
+											: "—"}
+									</span>
+								</div>
+								<div className="pt-2 relative pr-1 bg-[#2E2F3D] rounded-lg">
+									<div className="h-[240px] overflow-y-auto">
+										{offers?.similar_offers.data.map(
+											(offer) => (
+												<div
+													key={offer.id}
+													className="px-4 flex items-center justify-between h-[54px] border-b border-[#2C2C3A] last:border-b-0"
+												>
+													<div className="flex items-center gap-2">
+														<Image
+															width={38}
+															height={38}
+															alt=""
+															src="/icons/unblocked.svg"
+														/>
+														<span className="text-secondaryText">
+															Float:
+														</span>
+														<span className="font-semibold text-white">
+															{+offer.float}
+														</span>
+													</div>
+													<div className="flex items-center gap-2">
+														<span className="font-semibold">
+															{
+																offer.currency_symbol
+															}
+															{+offer.price}
+														</span>
+														<button
+															disabled
+															data-tooltip-id="default-tooltip"
+															data-tooltip-content={
+																"Unavailable"
+															}
+															className="!cursor-not-allowed opacity-70 flex-middle bg-accentBlue hover1:bg-accentBlueHovered w-[38px] h-[38px] min-w-[38px] rounded"
+														>
+															<Image
+																src="/icons/shopping-cart-white.svg"
+																width={18}
+																height={18}
+																alt=""
+															/>
+														</button>
+													</div>
+												</div>
+											)
+										)}
+									</div>
+									<img
+										className="z-10 absolute left-0 right-0 bottom-0 rounded-b-lg block pointer-events-none"
+										alt=""
+										src="/images/decorations/blur.png"
+									/>
+								</div>
 							</div>
 						</div>
 					</div>

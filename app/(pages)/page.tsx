@@ -354,17 +354,25 @@ export default function HomePage() {
 				<section className="w-full relative">
 					<div
 						className="
-			grid grid-cols-9 gap-1
-			max-[1520px]:grid-cols-6
-			max-[1168px]:grid-cols-4
-			max-[768px]:grid-cols-3
-			max-[520px]:grid-cols-2
-			max-[400px]:grid-cols-1
-			max-h-[850px] overflow-auto hide-scrollbar
-		"
+	grid grid-cols-9 gap-1
+	max-[400px]:grid-cols-1
+	max-[520px]:grid-cols-2
+	max-[768px]:grid-cols-3
+	max-[1168px]:grid-cols-4
+	max-[1520px]:grid-cols-6
+	max-h-[850px] overflow-auto hide-scrollbar
+"
 					>
 						{!loading && showBanner && (
-							<div className="col-span-4 rounded-md overflow-hidden relative max-h-[230px]">
+							<div
+								className="
+		col-span-4
+		max-[1168px]:col-span-3
+		max-[768px]:col-span-2
+		max-[520px]:col-span-1
+		rounded-md overflow-hidden relative max-h-[230px]
+	"
+							>
 								<img
 									src="/images/banner.png"
 									className="w-full h-full block object-cover rounded-md"

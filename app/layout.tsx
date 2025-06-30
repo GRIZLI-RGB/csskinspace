@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Suspense } from "react";
 
 import "./styles/globals.css";
 
@@ -25,7 +26,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${inter.variable}`}>{children}</body>
+			<body className={`${inter.variable}`}>
+				<Suspense>{children}</Suspense>
+			</body>
 		</html>
 	);
 }

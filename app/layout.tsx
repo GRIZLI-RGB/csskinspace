@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 
 import "./styles/globals.css";
 
+import "overlayscrollbars/overlayscrollbars.css";
+
 const inter = Inter({
 	variable: "--font-inter",
 	subsets: ["latin", "cyrillic"],

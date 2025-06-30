@@ -26,5 +26,7 @@ export const _paymentSystems_ = atom<PaymentSystemType[]>([]);
 
 export const _searchQuery_ = atom("");
 
+export const _searchTransactionId_ = atom("");
+
 export const _isOpenReplenishmentModal_ = atom(false);
 export const _isOpenPurchaseItemsModal_ = atom(false);

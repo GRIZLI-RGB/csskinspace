@@ -68,6 +68,7 @@ export type PurchaseType = BaseEntityType & {
 		souvenir: boolean;
 		rarity: string;
 		img: string;
+		screenshot: string;
 	};
 	purchase: {
 		success: boolean;

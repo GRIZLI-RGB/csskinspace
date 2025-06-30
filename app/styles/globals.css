@@ -74,6 +74,12 @@ input::-webkit-inner-spin-button {
 	margin: 0;
 }
 
+.os-scrollbar-horizontal {
+	--os-track-bg: #3a35fb !important;
+	--os-track-bg-hover: #3a35fb !important;
+	--os-track-bg-active: #3a35fb !important;
+}
+
 .hide-scrollbar::-webkit-scrollbar {
 	display: none;
 }

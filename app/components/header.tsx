@@ -16,6 +16,7 @@ import {
 	_globalLoading_,
 	_isMobileMenuOpen_,
 	_isOpenPurchaseItemsModal_,
+	_isOpenReplenishmentModal_,
 	_paymentSystems_,
 	_searchQuery_,
 	_user_,
@@ -469,8 +470,8 @@ function SearchBar({ className }: { className?: string }) {
 }
 
 function Balance({ className, user }: { className?: string; user: UserType }) {
-	const [isOpenTopUpBalanceModal, setIsOpenTopUpBalanceModal] =
-		useState(false);
+	const [isOpenReplenishmentModal, setIsOpenReplenishmentModal] =
+		useAtom(_isOpenReplenishmentModal_);
 	const [isOpenPurchasePaymentModal, setIsOpenPurchasePaymentModal] =
 		useState(false);
 
@@ -528,7 +529,7 @@ function Balance({ className, user }: { className?: string; user: UserType }) {
 				}
 			})
 			.finally(() => {
-				setIsOpenTopUpBalanceModal(false);
+				setIsOpenReplenishmentModal(false);
 				setIsOpenPurchasePaymentModal(true);
 				setLocalLoading(false);
 			});
@@ -547,7 +548,7 @@ function Balance({ className, user }: { className?: string; user: UserType }) {
 					{user.balance}
 				</span>
 				<button
-					onClick={() => setIsOpenTopUpBalanceModal(true)}
+					onClick={() => setIsOpenReplenishmentModal(true)}
 					className="bg-accentBlue hover:bg-accentBlueHovered rounded-sm flex-middle w-[30px] h-[30px]"
 				>
 					<Image
@@ -563,8 +564,8 @@ function Balance({ className, user }: { className?: string; user: UserType }) {
 			{/* Пополнение баланса шаг 1 */}
 			<Modal
 				className="max-w-[360px]"
-				open={isOpenTopUpBalanceModal}
-				onClose={() => setIsOpenTopUpBalanceModal(false)}
+				open={isOpenReplenishmentModal}
+				onClose={() => setIsOpenReplenishmentModal(false)}
 				showCloseButton
 			>
 				{localLoading && (
@@ -817,7 +818,7 @@ function User({ className, user }: { className?: string; user: UserType }) {
 	return (
 		<div className="flex items-center gap-2">
 			<Link
-				href="/profile/inventory"
+				href="/account/inventory"
 				className={clsx(
 					"flex gap-2 p-1 bg-thirdyBackground rounded-sm group hover:bg-fourthBackground",
 					className

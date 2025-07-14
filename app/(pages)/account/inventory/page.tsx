@@ -20,47 +20,6 @@ export default function AccountInventoryPage() {
 
 		getInventory()
 			.then((res) => setInventory(res.data.data))
-			// .then(() =>
-			// 	setInventory([
-			// 		{
-			// 			asset: 28960135121,
-			// 			base_id: 334,
-			// 			chance_to_transfer: 70,
-			// 			classid: 5228256059,
-			// 			currency_symbol: "€",
-			// 			float: "0.2815",
-			// 			id: 4082693155,
-			// 			img: "https://csgomarket.webalchemy.fun/api/items/image/P2000%20|%20Red%20FragCam%20(Field-Tested)",
-			// 			instanceid: 188530139,
-			// 			market_hash_name: "P2000 | Red FragCam (Field-Tested)",
-			// 			old_price: "24.80",
-			// 			paintindex: "275",
-			// 			paintseed: "805",
-			// 			phase: "",
-			// 			price: "3.67",
-			// 			rarity: "Field-Tested",
-			// 			rarity_color: "#2c479fcc",
-			// 			rarity_gradient: {
-			// 				from: "#2E2F3F80",
-			// 				via: "#2E376533",
-			// 				to: "#2c479fcc",
-			// 			},
-			// 			real_instance: 188530139,
-			// 			ru_name:
-			// 				"P2000 | Красные фрагменты (После полевых испытаний)",
-			// 			ru_rarity: "Армейское качество",
-			// 			screenshot:
-			// 				"https://csgomarket.webalchemy.fun/api/items/screenshot/P2000%20|%20Red%20FragCam%20(Field-Tested)",
-			// 			souvenir: false,
-			// 			stamp: "2025-06-21T04:42:42.000000Z",
-			// 			stattrack: false,
-			// 			stickers: [],
-			// 			type: "Pistol",
-			// 			wear: "Field-Tested",
-			// 			wear_short_name: "FT",
-			// 		},
-			// 	])
-			// )
 			.finally(() => setGlobalLoading(false));
 	}, []);
 

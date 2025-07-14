@@ -402,12 +402,12 @@ export default function ItemCard({ item }: { item: ItemType }) {
 													className="px-4 flex items-center justify-between h-[54px] border-b border-[#2C2C3A] last:border-b-0"
 												>
 													<div className="flex items-center gap-2">
-														<Image
+														{/* <Image
 															width={38}
 															height={38}
 															alt=""
 															src="/icons/unblocked.svg"
-														/>
+														/> */}
 														<span className="text-secondaryText">
 															Float:
 														</span>

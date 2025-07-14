@@ -15,12 +15,19 @@ import "react-accessible-accordion/dist/fancy-example.css";
 import data from "@/app/utils/data";
 import Image from "next/image";
 import clsx from "clsx";
+import { useSetAtom } from "jotai";
+import { _globalLoading_ } from "@/app/utils/store";
+import { useEffect } from "react";
 
 export default function FaqPage() {
+	const setGlobalLoading = useSetAtom(_globalLoading_);
+
+	useEffect(() => setGlobalLoading(false), []);
+
 	return (
 		<>
 			<Title className="mb-8" center tag="h1">
-				Frequently Asked Questions
+				Frequently Asked Questions (FAQ)
 			</Title>
 			<Accordion allowZeroExpanded allowMultipleExpanded>
 				{data.faq.map(({ question, answer }) => (
@@ -37,7 +44,7 @@ export default function FaqPage() {
 										)}
 									>
 										{question}
-										<button className="w-[34px] h-[34px] flex-middle bg-[#363745] rounded">
+										<button className="w-[34px] min-w-[34px] h-[34px] flex-middle bg-[#363745] rounded">
 											<Image
 												width={18}
 												height={18}
@@ -52,7 +59,7 @@ export default function FaqPage() {
 							</AccordionItemState>
 						</AccordionItemHeading>
 						<AccordionItemPanel className="p-6 pt-0 bg-[#191922] rounded-b-2xl">
-							<p className="text-secondaryText">{answer}</p>
+							<div className="text-secondaryText">{answer}</div>
 						</AccordionItemPanel>
 					</AccordionItem>
 				))}

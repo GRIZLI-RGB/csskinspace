@@ -87,7 +87,7 @@ export default function PersonalAccountLayout({
 
 	const handleCopy = () => {
 		navigator.clipboard.writeText(
-			`https://csgomarket.webalchemy.fun?ref=${user?.id}`
+			`https://api.csskinspace.com?ref=${user?.id}`
 		);
 		setCopied(true);
 		setTimeout(() => setCopied(false), 2000);
@@ -116,7 +116,7 @@ export default function PersonalAccountLayout({
 					<div className="bg-[#16161D] rounded-2xl p-6 max-sm:rounded-xl max-sm:p-4 w-full flex gap-4 max-sm:flex-col max-sm:items-center max-sm:text-center">
 						<div className="relative group">
 							<Image
-							quality={100}
+								quality={100}
 								width={112}
 								height={112}
 								className={`
@@ -297,7 +297,7 @@ export default function PersonalAccountLayout({
 								<span className="text-placeholderText text-xs">
 									Your link
 								</span>
-								<span className="text-secondaryText font-medium">{`https://csgomarket.webalchemy.fun?ref=${user.id}`}</span>
+								<span className="text-secondaryText font-medium">{`https://api.csskinspace.com?ref=${user.id}`}</span>
 							</div>
 							<Button
 								className="!h-full max-w-[68px] max-sm:!h-14 max-sm:max-w-full"

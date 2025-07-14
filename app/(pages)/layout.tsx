@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { Tooltip } from "react-tooltip";
 import Image from "next/image";
 
@@ -38,7 +38,7 @@ export default function PagesLayout({
 	const searchParams = useSearchParams();
 	const router = useRouter();
 
-	const globalLoading = useAtomValue(_globalLoading_);
+	const [globalLoading, setGlobalLoading] = useAtom(_globalLoading_);
 	const setUser = useSetAtom(_user_);
 
 	const [firstRegistrationData, setFirstRegistrationData] = useState<{
@@ -112,6 +112,22 @@ export default function PagesLayout({
 				});
 		}
 	}, [pathname, searchParams, router]);
+
+	useEffect(() => {
+		if (
+			[
+				"/terms-of-use",
+				"/faq",
+				"/cookie-policy",
+				"/about-us",
+				"/guarantees",
+				"/privacy-policy",
+				"/contacts",
+			].includes(pathname)
+		) {
+			setGlobalLoading(false);
+		}
+	}, [pathname]);
 
 	return (
 		<>

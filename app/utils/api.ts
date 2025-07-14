@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { ApiGetItemsType, ItemQualityType } from "./types";
 
-const API_URL = "https://csgomarket.webalchemy.fun/api/";
+const API_URL = "https://api.csskinspace.com/api/";
 
 const api = axios.create({
 	baseURL: API_URL,

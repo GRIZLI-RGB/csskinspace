@@ -99,7 +99,11 @@ export default function Guarantees() {
 							</ul>
 							Accounts flagged for suspicious activity may be
 							suspended or permanently restricted, in accordance
-							with our [Terms of Use].
+							with our{" "}
+							<Link href="/terms-of-use" target="_blank">
+								Terms of Use
+							</Link>
+							.
 						</>,
 					]}
 				/>
@@ -116,8 +120,11 @@ export default function Guarantees() {
 							directly attributable to the Company.
 							<br />
 							Users must submit refund requests promptly via{" "}
-							<Link href="#" target="_blank">
-								SUPPORT EMAIL
+							<Link
+								href="mailto:support@csskinspace.com"
+								target="_blank"
+							>
+								support@csskinspace.com
 							</Link>
 							. All requests will be reviewed pursuant to{" "}
 							<strong>
@@ -165,8 +172,11 @@ export default function Guarantees() {
 					text={[
 						<>
 							The Company provides support to Users via{" "}
-							<Link href="#" target="_blank">
-								SUPPORT EMAIL
+							<Link
+								href="mailto:support@csskinspace.com"
+								target="_blank"
+							>
+								support@csskinspace.com
 							</Link>
 							.<br />
 							Response times may vary depending on inquiry volume,
@@ -178,7 +188,11 @@ export default function Guarantees() {
 				<Text>
 					📌 This Guarantees section is provided for informational
 					purposes and does not create any rights or obligations
-					beyond those expressly set forth in the [Terms of Use].
+					beyond those expressly set forth in the{" "}
+					<Link href="/terms-of-use" target="_blank">
+						Terms of Use
+					</Link>
+					.
 				</Text>
 			</div>
 		</>

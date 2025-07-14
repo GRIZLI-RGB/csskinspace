@@ -873,7 +873,8 @@ const SteamAuthButton = ({ className }: { className?: string }) => {
 				alt="Steam auth button"
 			/>
 
-			<span className="text-white font-bold">Log in with steam</span>
+			<span className="text-white font-bold max-xs:hidden">Log in with steam</span>
+			<span className="text-white font-bold hidden max-xs:inline-block">Log in</span>
 		</button>
 	);
 };

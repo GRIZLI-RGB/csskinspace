@@ -45,8 +45,8 @@ const data = {
 					link: "/privacy-policy",
 				},
 				{
-					text: "Cookies policy",
-					link: "/cookies-policy",
+					text: "Cookie policy",
+					link: "/cookie-policy",
 				},
 			],
 		},
@@ -78,11 +78,7 @@ const data = {
 			question: "💡 How does CSSKINSPACE work?",
 			answer: (
 				<>
-					CSSKINSPACE allows users to{" "}
-					<a href="/sell" className="text-accent underline">
-						sell skins
-					</a>{" "}
-					quickly.
+					CSSKINSPACE allows users to sell skins quickly.
 					<ul className="list-disc list-inside mt-2">
 						<li>No registration needed</li>
 						<li>Instant payments</li>
@@ -220,12 +216,7 @@ const data = {
 				<>
 					No. All purchases are final once confirmed and processed.
 					Refunds are not available, except in the rare case of a
-					technical error caused solely by our system. See Section 4.9
-					and 5.4 of our{" "}
-					<a href="/terms-of-use" className="text-accent underline">
-						Terms of Use
-					</a>
-					.
+					technical error caused solely by our system.
 				</>
 			),
 		},

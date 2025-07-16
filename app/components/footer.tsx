@@ -49,6 +49,7 @@ export default function Footer() {
 					<nav className="grid grid-cols-5 gap-2">
 						{data.footer.socialNetworks.map((socialNetwork) => (
 							<a
+								href={socialNetwork.link}
 								target="_blank"
 								key={socialNetwork.iconShortUrl}
 								className="w-[46px] h-[46px] rounded-md flex-middle bg-secondaryBackground group hover:bg-fourthBackground"
@@ -90,14 +91,13 @@ export default function Footer() {
 				</div>
 				<div className="max-sm:text-center max-sm:gap-6 max-sm:flex-col  flex items-center justify-between text-xs gap-12">
 					<p>
-						YOURGAMES LTD Company number 16382696 Registered office
-						address: 86-90 Paul Street London, Greater London,
-						England, EC2A 4NE
+						PLAY SPACE TECH LTD Company number 16526445 Registered
+						office address: 28 City Road, London, United Kingdom,
+						EC1V 2NX
 					</p>
 
 					<p className="text-right max-sm:text-center">
-						CsSkinSpace website is operated by In-Game Solutions
-						PTE. LTD © 2020-2025 CsSkinSpace, All Rights Reserved
+						© 2025 Csskinspace. All rights reserved
 					</p>
 				</div>
 			</div>
